@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animals</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0 auto;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            cursor: default;
+            font-size: 16px;
+        }
+        .animal-body {
+            border: 1px solid red;
+            width: 500px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Here are the awesome animals!</h2>
+    <button><a href="/animals/new">Add an Animal</a></button>
+    <% for(var i in animalBank) { %>
+        <div class="animal-body">
+            <h3>Animal's Type: "<%= animalBank[i].animal %>"</h3>
+            <p>Animal's Name: <%= animalBank[i].name %></p>
+            <p>Time added at: <%= animalBank[i].createdAt.toUTCString() %></p>
+            <p>Animal's Age: <%= animalBank[i].age %></p>
+
+            
+            <form action="/animals/edit/<%=animalBank[i]._id%>" method="get">
+                <input type="submit" value="Edit">
+            </form>
+
+            <form action="/animals/destroy/<%=animalBank[i]._id%>" method="post">
+                <input type="submit" value="Delete">
+            </form>
+
+            <!-- <button><a href="/animals/edit/:<%=animalBank[i]._id%>">Edit</a></button>
+            <button><a href="/animals/destroy/:<%=animalBank[i]._id%>">Delete</a></button> -->
+        </div>
+    <% } %>
+</body>
+</html>

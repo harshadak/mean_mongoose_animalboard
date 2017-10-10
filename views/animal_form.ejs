@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add an animal</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1 {
+            text-align: center; 
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            cursor: default;
+        }
+        form {
+            border: 2px solid black;
+            display: block;
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input, select, textarea {
+            display: block;
+            margin-bottom: 15px;
+        }
+        div.result {
+            margin: 0 auto;
+        }
+        h4, p {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Animal Dashboard</h1>
+    <% if (typeof(animalBank) == "undefined") {%>
+        <form action="/animals" method="post">
+            <label for="">Type of Animal:</label>
+            <input type="text" placeholder="Enter animal" name="animal">
+            <label for="">Animal's Name:</label>
+            <input type="text" placeholder="Enter name of the animal" name="name">
+            <label for="">Animal's Age:</label>
+            <input type="text" placeholder="Enter age of the animal" name="age">
+            <input type="submit" value="Add Animal!">
+            <button><a href="/">See the Animals!</a></button>
+        </form>
+    <% } else { %>
+        <form action="/animals/edit/<%= animalBank._id %>" method="post">
+            <label for="">Type of Animal:</label>
+            <input type="text" placeholder="Enter animal" name="animal" value="<%=animalBank.animal%>">
+            <label for="">Animal's Name:</label>
+            <input type="text" placeholder="Enter name of the animal" name="name" value="<%=animalBank.name%>">
+            <label for="">Animal's Age:</label>
+            <input type="text" placeholder="Enter age of the animal" name="age" value="<%=animalBank.age%>">
+            <input type="submit" value="Add Animal!">
+            <button><a href="/">See the Animals!</a></button>
+        </form>
+    <% } %>
+    <% if(typeof(errors) != 'undefined' ) { %>
+        <% for (var x in errors) { %>
+            <h3><%= errors[x].message %></h3>
+        <% } %>
+    <% } %>
+
+</body>
+</html>
