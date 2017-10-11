@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show an Animal</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        <h3>Here is the Animal you selected:</h3>
+            <h4>Animal Type: <%= animalBank.animal %></h4>
+            <h4>Animal Name: <%= animalBank.name %></h4>
+            <h4>Animal Age: <%= animalBank.age %></h4>
+            <a href="/animals/edit/<%=animalBank._id%>">Edit</a>
+            <form action="/animals/destroy/<%= animalBank._id %>" method="post">
+                <input type='submit' value='Delete This Animal'>
+            </form>
+        <hr>
+        <a href="/">Back to all animals!</a>
+    </div>
+</body>
+</html>

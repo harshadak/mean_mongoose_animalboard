@@ -65,7 +65,6 @@ app.post('/animals', function(req, res) {
         // if there is an error console.log that something went wrong!
         if(err) {
             console.log('something went wrong');
-            console.log(err.errors);
             res.render('animal_form', {errors: err.errors});
         } else { // else console.log that we did well and then redirect to the root route
             console.log('successfully added an animal!');
@@ -73,6 +72,20 @@ app.post('/animals', function(req, res) {
         }
     })
 });
+
+// GET with id - one fish info
+app.get('/animals/:id', function(req, res) {
+    console.log("animal id-----"+"ObjectId('"+req.params.id+"')")
+    Animal.findOne({_id:req.params.id}, function(err, animals) {
+        if(err) {
+            console.log("Something went wrong");
+            res.render('showAnimal');
+        } else {
+            console.log("got data", animals);
+            res.render('showAnimal', {animalBank: animals});
+        }
+    })
+})
 
 // NEED TO WORK ON THIS
 // Route to display form for editing an animal
@@ -94,7 +107,7 @@ app.post('/animals/edit/:id', function(req, res) {
     Animal.update({_id: req.params.id}, req.body, function(err, animals) {
         if(err) {
             console.log('something went wrong', err);
-            res.render('animal_form', {errors: err.errors});
+            res.render('index', {errors: animals.errors});
         } else {
             console.log("successfully edited animal", animals);
             res.redirect('/');
